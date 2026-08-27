@@ -1,0 +1,77 @@
+﻿@page
+@model GiftofGivers.Pages.Employee.DashboardModel
+@{
+    ViewData["Title"] = "Employee Dashboard";
+}
+
+<div class="container py-5">
+    <h1 class="mb-4">Employee Dashboard</h1>
+
+    <div class="row g-4">
+        <div class="col-lg-5">
+            <div class="card card-gotg p-4">
+                <h5>Post a Project Update</h5>
+                <form method="post" asp-page-handler="PostUpdate">
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input asp-for="NewUpdate.Title" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea asp-for="NewUpdate.Description" class="form-control" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-gotg w-100">Post Update</button>
+                </form>
+            </div>
+
+            <div class="card card-gotg p-4 mt-4">
+                <h5>Recent Donations</h5>
+                <ul class="list-group list-group-flush">
+                    @foreach (var d in Model.RecentDonations)
+                    {
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span>@(d.IsAnonymous ? "Anonymous" : d.DonorName)</span>
+                            <span>@d.Currency @d.Amount.ToString("N2")</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card card-gotg p-4 mb-4">
+                <h5>Posted Updates</h5>
+                @foreach (var u in Model.Updates)
+                {
+                    <div class="border-bottom py-2">
+                        <strong>@u.Title</strong>
+                        <p class="mb-1 small text-muted">@u.PostedOn.ToString("dd MMM yyyy") &bull; @u.PostedByName</p>
+                        <p class="mb-0">@u.Description</p>
+                    </div>
+                }
+            </div>
+
+            <div class="card card-gotg p-4">
+                <h5>Volunteer Sign-Ups</h5>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr><th>Name</th><th>Skills</th><th>Availability</th><th>Contact</th></tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var v in Model.Volunteers)
+                            {
+                                <tr>
+                                    <td>@v.FullName</td>
+                                    <td>@v.Skills</td>
+                                    <td>@v.Availability</td>
+                                    <td>@v.Email</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

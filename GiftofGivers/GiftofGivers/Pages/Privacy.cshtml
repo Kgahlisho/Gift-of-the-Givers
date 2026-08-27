@@ -1,0 +1,242 @@
+﻿@page
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+
+            <!-- Page Header -->
+            <div class="mb-4">
+                <h1 class="display-5 fw-bold text-primary">Privacy Policy</h1>
+                <hr class="w-25" style="height: 3px; background-color: #dc3545; opacity: 1;" />
+                <p class="lead text-muted">
+                    Your privacy matters to us. Learn how we handle your personal information.
+                </p>
+            </div>
+
+            <!-- Last Updated -->
+            <div class="alert alert-light border" role="alert">
+                <strong><i class="bi bi-clock-history"></i> Last Updated:</strong>
+                <span id="lastUpdated">1 January 2026</span>
+            </div>
+
+            <!-- Introduction -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-shield-check text-success"></i> Our Commitment</h5>
+                    <p>
+                        The Gift of the Givers Foundation respects your privacy and is committed to protecting
+                        your personal data. This privacy policy explains how we collect, use, share, and protect
+                        your information when you use our website, donate, volunteer, or interact with us.
+                    </p>
+                    <p>
+                        We comply with the Protection of Personal Information Act (POPIA) of South Africa and
+                        other applicable data protection laws.
+                    </p>
+                </div>
+            </div>
+
+            <!-- What Information We Collect -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-database text-primary"></i> What Information We Collect</h5>
+                    <p>We may collect the following categories of personal information:</p>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded-3">
+                                <h6><i class="bi bi-person-badge"></i> Identity Data</h6>
+                                <ul class="small mb-0">
+                                    <li>Full name</li>
+                                    <li>Date of birth (if provided)</li>
+                                    <li>ID/passport number (for tax certificates)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded-3">
+                                <h6><i class="bi bi-envelope"></i> Contact Data</h6>
+                                <ul class="small mb-0">
+                                    <li>Email address</li>
+                                    <li>Phone number</li>
+                                    <li>Physical address (if provided)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded-3">
+                                <h6><i class="bi bi-credit-card"></i> Financial Data</h6>
+                                <ul class="small mb-0">
+                                    <li>Donation amounts</li>
+                                    <li>Payment method (we do not store full card details)</li>
+                                    <li>Donation history</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded-3">
+                                <h6><i class="bi bi-bar-chart"></i> Technical Data</h6>
+                                <ul class="small mb-0">
+                                    <li>IP address</li>
+                                    <li>Browser type and version</li>
+                                    <li>Device information</li>
+                                    <li>Cookies and usage data</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How We Use Your Information -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-gear text-warning"></i> How We Use Your Information</h5>
+                    <p>We use your personal information for the following purposes:</p>
+                    <ul>
+                        <li><strong>To process donations</strong> – including generating tax certificates and receipts.</li>
+                        <li><strong>To manage volunteer registrations</strong> – to coordinate your involvement.</li>
+                        <li><strong>To communicate with you</strong> – about relief updates, fundraising campaigns, and emergency appeals.</li>
+                        <li><strong>To improve our website and services</strong> – by analysing usage patterns.</li>
+                        <li><strong>To comply with legal obligations</strong> – such as tax reporting and regulatory requirements.</li>
+                    </ul>
+                    <p class="mb-0">
+                        <span class="badge bg-info text-dark">Lawful basis</span>
+                        We rely on your consent, contractual necessity, and legitimate interests to process your data.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Sharing Your Information -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-share text-danger"></i> Sharing Your Information</h5>
+                    <p>We do not sell, rent, or trade your personal information. We may share your data with:</p>
+                    <ul>
+                        <li><strong>Service providers</strong> – such as payment processors, cloud hosting, and email delivery services.</li>
+                        <li><strong>Regulatory authorities</strong> – when required by law.</li>
+                        <li><strong>Partners</strong> – only with your explicit consent (e.g., joint fundraising campaigns).</li>
+                    </ul>
+                    <p class="small text-muted">
+                        <i class="bi bi-info-circle"></i> All third-party processors are contractually bound to protect your data.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Data Retention & Security -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-lock-fill text-success"></i> Data Retention &amp; Security</h5>
+                    <p><strong>Retention:</strong> We keep your personal information only as long as necessary:</p>
+                    <ul>
+                        <li>Donation records: 7 years (for tax and audit purposes).</li>
+                        <li>Volunteer records: 3 years after last activity.</li>
+                        <li>Contact inquiries: 2 years.</li>
+                    </ul>
+                    <p><strong>Security:</strong> We implement technical and organisational measures to protect your data, including:</p>
+                    <ul>
+                        <li>Encryption of data in transit (HTTPS/TLS).</li>
+                        <li>Access controls and authentication.</li>
+                        <li>Regular security audits and monitoring.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Your Rights -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-person-check text-primary"></i> Your Rights</h5>
+                    <p>Under South African POPIA and other applicable laws, you have the right to:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul>
+                                <li><strong>Access</strong> – request a copy of your data.</li>
+                                <li><strong>Rectification</strong> – correct inaccurate data.</li>
+                                <li><strong>Erasure</strong> – request deletion (subject to legal obligations).</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul>
+                                <li><strong>Object</strong> – to certain processing activities.</li>
+                                <li><strong>Data portability</strong> – receive your data in a structured format.</li>
+                                <li><strong>Withdraw consent</strong> – at any time.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="mb-0">
+                        To exercise your rights, contact us at <a href="mailto:privacy@giftofthegivers.org">privacy@giftofthegivers.org</a>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Cookies -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-cookie text-warning"></i> Cookies</h5>
+                    <p>
+                        We use cookies to enhance your experience, analyse site traffic, and for essential functionality.
+                        You can control cookie preferences in your browser settings.
+                    </p>
+                    <p class="mb-0">
+                        <a href="#" class="btn btn-sm btn-outline-secondary">Cookie Settings</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Contact Details -->
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-headset text-success"></i> Contact Us</h5>
+                    <p>If you have any questions about this privacy policy or how we handle your data, please reach out:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <address>
+                                <strong>Gift of the Givers Foundation</strong><br />
+                                Private Bag X06,<br />
+                                Pietermaritzburg, 3200<br />
+                                South Africa
+                            </address>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <i class="bi bi-envelope"></i> <a href="mailto:privacy@giftofthegivers.org">privacy@giftofthegivers.org</a><br />
+                                <i class="bi bi-telephone"></i> <a href="tel:+27303415000">+27 30 341 5000</a><br />
+                                <i class="bi bi-globe"></i> <a href="https://giftofthegivers.org" target="_blank">giftofthegivers.org</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Changes to Policy -->
+            <div class="alert alert-warning" role="alert">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <strong>Policy Updates:</strong> We may update this policy from time to time. The latest version will always be posted on this page.
+                Please check back periodically.
+            </div>
+
+            <!-- Back to Home Button -->
+            <div class="text-center mt-4">
+                <a asp-page="/Index" class="btn btn-primary">
+                    <i class="bi bi-house-fill"></i> Return to Home
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Auto-update last updated date -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('lastUpdated').textContent = today.toLocaleDateString('en-ZA', options);
+        });
+    </script>
+}

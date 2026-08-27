@@ -1,0 +1,42 @@
+﻿@page "/"
+@model GiftofGivers.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home - Gift of the Givers";
+}
+
+<section class="gotg-hero text-center">
+    <div class="container">
+        <h1 class="display-5">Bringing Hope. Delivering Help.</h1>
+        <p class="lead">Coordinating disaster relief, volunteers, and resources across South Africa and beyond.</p>
+        <a class="btn btn-gotg btn-lg me-2" asp-page="/Donation/Index">Donate Now</a>
+        <a class="btn btn-outline-light btn-lg" asp-page="/Volunteer/Register">Become a Volunteer</a>
+    </div>
+</section>
+
+<section class="container py-5">
+    <h2 class="mb-4">Latest Relief Updates</h2>
+    <div class="row g-4">
+        @if (Model.LatestUpdates.Count == 0)
+        {
+            <p class="text-muted">No updates posted yet. Check back soon.</p>
+        }
+        @foreach (var update in Model.LatestUpdates)
+        {
+            <div class="col-md-4">
+                <div class="card card-gotg h-100 p-3">
+                    <h5>@update.Title</h5>
+                    <p class="text-muted small">@update.PostedOn.ToString("dd MMM yyyy") &bull; @update.PostedByName</p>
+                    <p>@update.Description</p>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<section class="container pb-5 text-center">
+    <div class="row">
+        <div class="col-md-4"><span class="stat-badge">24/7</span><p class="mt-2">Emergency Response</p></div>
+        <div class="col-md-4"><span class="stat-badge">40+ Countries</span><p class="mt-2">International Reach</p></div>
+        <div class="col-md-4"><span class="stat-badge">Volunteer-Driven</span><p class="mt-2">Community Powered</p></div>
+    </div>
+</section>
