@@ -43,6 +43,10 @@
                 <h5>Posted Updates</h5>
                 @foreach (var u in Model.Updates)
                 {
+
+
+                    // updates are always displayed in reverse chronological order, so the most recent update is at the top.
+                    //
                     <div class="border-bottom py-2">
                         <strong>@u.Title</strong>
                         <p class="mb-1 small text-muted">@u.PostedOn.ToString("dd MMM yyyy") &bull; @u.PostedByName</p>
