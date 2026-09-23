@@ -1,4 +1,5 @@
-/* Gift of the Givers - warm humanitarian theme
+/* 
+   Gift of the Givers - warm humanitarian theme
    */
 :root {
     --gotg-orange: #E67E4D;
@@ -22,8 +23,9 @@
     --gotg-transition: 200ms ease;
 }
 
-/* Base
-   */
+/* 
+   Base
+  */
 body {
     display: flex;
     flex-direction: column;
@@ -50,7 +52,8 @@ a {
         color: var(--gotg-orange);
     }
 
-/* Navbar - warm cream, not stark navy */
+/*    Navbar - warm cream, not stark navy
+   */
 .gotg-navbar {
     background: var(--gotg-surface);
     box-shadow: var(--gotg-shadow-sm);
@@ -113,7 +116,7 @@ a {
     }
 
 .gotg-logo {
-    background: var(--gotg-orange);
+   /* background: var(--gotg-orange);*/
     color: white;
     font-weight: 700;
     font-size: 0.85rem;
@@ -124,9 +127,17 @@ a {
     align-items: center;
     justify-content: center;
     box-shadow: var(--gotg-shadow-sm);
+    overflow: hidden;
 }
 
-/* Hero - warm, welcoming, not corporate-cold
+    .gotg-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+/* 
+   Hero - warm, welcoming, not corporate-cold
    */
 .gotg-hero {
     position: relative;
@@ -159,8 +170,8 @@ a {
         font-weight: 400;
     }
 
-/* Buttons - soft, pill-like, friendly
-   */
+/* 
+   Buttons - soft, pill-like, friendly*/
 .btn-gotg {
     background-color: var(--gotg-orange);
     color: white;
@@ -201,7 +212,8 @@ a {
         color: white;
     }
 
-/* Cards - soft cream, gentle warmth, rounded
+/* 
+   Cards - soft cream, gentle warmth, rounded
    */
 .card-gotg {
     border: 1px solid var(--gotg-border);
@@ -216,8 +228,8 @@ a {
         transform: translateY(-2px);
     }
 
-/* Footer - warm brown, not cold navy
-   */
+/* 
+   Footer - warm brown, not cold navy*/
 .gotg-footer {
     background-color: var(--gotg-navy);
     border-top: 4px solid var(--gotg-orange);
@@ -227,8 +239,8 @@ a {
         color: rgba(255, 255, 255, 0.65);
     }
 
-/* Stat badges - soft pill, warm gold
-  */
+/* 
+   Stat badges - soft pill, warm gold */
 .stat-badge {
     background-color: var(--gotg-gold);
     color: var(--gotg-navy);
@@ -239,8 +251,9 @@ a {
     box-shadow: var(--gotg-shadow-sm);
 }
 
-/* Forms - soft, rounded, warm focus ring
-   */
+/* 
+   Forms - soft, rounded, warm focus ring
+ */
 .form-control,
 .form-select {
     border-radius: var(--gotg-radius-sm);
@@ -262,8 +275,8 @@ a {
     margin-bottom: 0.35rem;
 }
 
-/* Alerts - soft, rounded, warm
-   */
+/* 
+   Alerts - soft, rounded, warm*/
 .alert {
     border: none;
     border-radius: var(--gotg-radius-sm);
@@ -280,8 +293,9 @@ a {
     color: #8A4227;
 }
 
-/* Utility: gentle entrance animation
-   */
+/* 
+   Utility: gentle entrance animation
+*/
 @keyframes gotg-fade-up {
     from {
         opacity: 0;

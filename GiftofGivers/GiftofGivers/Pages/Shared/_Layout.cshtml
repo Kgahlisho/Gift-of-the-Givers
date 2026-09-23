@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Gift of the Givers</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" asp-append-version="true" />
 </head>
 <body>
 
@@ -13,7 +14,9 @@
         <nav class="navbar navbar-expand-lg navbar-dark gotg-navbar sticky-top">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center gap-2" asp-page="/Index">
-                    <span class="gotg-logo">GG</span>
+                    <span class="gotg-logo">
+                        <img src="~/images/gotg-logo-mark.png" alt="Gift of the Givers logo" />    
+                    </span>
                     <span class="fw-bold">Gift of the Givers</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
