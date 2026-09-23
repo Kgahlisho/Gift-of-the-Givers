@@ -1,68 +1,299 @@
+/* Gift of the Givers - warm humanitarian theme
+   */
 :root {
-    --gotg-orange: #E4572E;
-    --gotg-navy: #1B2A41;
-    --gotg-gold: #F2A541;
+    --gotg-orange: #E67E4D;
+    --gotg-orange-dark: #C9622F;
+    --gotg-navy: #4A3B2A;
+    --gotg-navy-light: #6B5643;
+    --gotg-gold: #E8A94A;
+    --gotg-green: #6B8F71;
+    --gotg-ink: #3F332B;
+    --gotg-muted: #8A7A6D;
+    --gotg-border: #EADFCF;
+    --gotg-surface: #FFFCF7;
+    --gotg-bg: #FBF3E7;
+    --gotg-cream: #F6E9D8;
+    --gotg-radius-sm: 10px;
+    --gotg-radius: 16px;
+    --gotg-radius-lg: 22px;
+    --gotg-shadow-sm: 0 2px 6px rgba(74, 59, 42, 0.08);
+    --gotg-shadow: 0 8px 20px rgba(74, 59, 42, 0.10);
+    --gotg-shadow-lg: 0 16px 36px rgba(74, 59, 42, 0.14);
+    --gotg-transition: 200ms ease;
 }
 
+/* Base
+   */
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background-color: #f7f7f5;
+    font-family: Georgia, "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    color: var(--gotg-ink);
+    background-color: var(--gotg-bg);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
 }
 
-.gotg-navbar {
-    background: linear-gradient(90deg, var(--gotg-navy), #2d4a6d);
+h1, h2, h3, h4, h5, h6 {
+    font-family: Georgia, "Segoe UI", serif;
+    color: var(--gotg-navy);
+    font-weight: 700;
 }
+
+a {
+    color: var(--gotg-orange-dark);
+    transition: color var(--gotg-transition);
+}
+
+    a:hover {
+        color: var(--gotg-orange);
+    }
+
+/* Navbar - warm cream, not stark navy */
+.gotg-navbar {
+    background: var(--gotg-surface);
+    box-shadow: var(--gotg-shadow-sm);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gotg-border);
+}
+
+    .gotg-navbar .navbar-brand,
+    .gotg-navbar .navbar-brand span {
+        color: var(--gotg-navy) !important;
+    }
+
+    .gotg-navbar .nav-link {
+        color: var(--gotg-navy) !important;
+        font-weight: 600;
+        opacity: 0.8;
+        transition: opacity var(--gotg-transition), color var(--gotg-transition);
+        border-radius: var(--gotg-radius-sm);
+        padding: 0.4rem 0.9rem !important;
+    }
+
+        .gotg-navbar .nav-link:hover {
+            opacity: 1;
+            background-color: var(--gotg-cream);
+            color: var(--gotg-orange-dark) !important;
+        }
+
+    .gotg-navbar .navbar-toggler {
+        border-color: var(--gotg-border);
+    }
+
+    .gotg-navbar .navbar-toggler-icon {
+        filter: invert(0.3) sepia(1) saturate(2) hue-rotate(-10deg);
+    }
+
+    .gotg-navbar .btn-outline-light {
+        color: var(--gotg-navy);
+        border-color: var(--gotg-navy);
+    }
+
+        .gotg-navbar .btn-outline-light:hover {
+            background-color: var(--gotg-navy);
+            color: white;
+        }
+
+    .gotg-navbar .btn-light {
+        background-color: var(--gotg-orange);
+        color: white;
+        border: none;
+    }
+
+        .gotg-navbar .btn-light:hover {
+            background-color: var(--gotg-orange-dark);
+            color: white;
+        }
+
+    .gotg-navbar .text-light {
+        color: var(--gotg-navy) !important;
+    }
 
 .gotg-logo {
     background: var(--gotg-orange);
     color: white;
     font-weight: 700;
-    width: 38px;
-    height: 38px;
+    font-size: 0.85rem;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: var(--gotg-shadow-sm);
 }
 
+/* Hero - warm, welcoming, not corporate-cold
+   */
 .gotg-hero {
-    background: linear-gradient(135deg, var(--gotg-navy), #3a5a80);
-    color: white;
-    padding: 70px 0;
+    position: relative;
+    background: linear-gradient(135deg, #F3D9AE 0%, #EDC189 45%, var(--gotg-orange) 130%);
+    color: var(--gotg-navy);
+    padding: 90px 0;
+    overflow: hidden;
 }
+
+    .gotg-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.35), transparent 40%), radial-gradient(circle at 90% 80%, rgba(107, 143, 113, 0.18), transparent 45%);
+        pointer-events: none;
+    }
+
+    .gotg-hero > * {
+        position: relative;
+    }
 
     .gotg-hero h1 {
+        color: var(--gotg-navy);
         font-weight: 700;
     }
 
+    .gotg-hero .lead {
+        color: var(--gotg-navy);
+        opacity: 0.85;
+        font-weight: 400;
+    }
+
+/* Buttons - soft, pill-like, friendly
+   */
 .btn-gotg {
     background-color: var(--gotg-orange);
     color: white;
     border: none;
+    font-weight: 600;
+    padding: 0.6rem 1.5rem;
+    border-radius: 999px;
+    box-shadow: var(--gotg-shadow-sm);
+    transition: background-color var(--gotg-transition), box-shadow var(--gotg-transition), transform var(--gotg-transition);
 }
 
     .btn-gotg:hover {
-        background-color: #c8481f;
+        background-color: var(--gotg-orange-dark);
+        color: white;
+        box-shadow: var(--gotg-shadow);
+        transform: translateY(-1px);
+    }
+
+    .btn-gotg:active {
+        transform: translateY(0);
+    }
+
+    .btn-gotg:focus-visible {
+        outline: 2px solid var(--gotg-navy);
+        outline-offset: 2px;
+    }
+
+/* Outline button used on the hero ("Become a Volunteer") reads warmer too */
+.gotg-hero .btn-outline-light {
+    color: var(--gotg-navy);
+    border-color: var(--gotg-navy);
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+    .gotg-hero .btn-outline-light:hover {
+        background-color: var(--gotg-navy);
         color: white;
     }
 
+/* Cards - soft cream, gentle warmth, rounded
+   */
 .card-gotg {
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    border: 1px solid var(--gotg-border);
+    border-radius: var(--gotg-radius-lg);
+    box-shadow: var(--gotg-shadow-sm);
+    background-color: var(--gotg-surface);
+    transition: box-shadow var(--gotg-transition), transform var(--gotg-transition);
 }
 
+    .card-gotg:hover {
+        box-shadow: var(--gotg-shadow);
+        transform: translateY(-2px);
+    }
+
+/* Footer - warm brown, not cold navy
+   */
 .gotg-footer {
     background-color: var(--gotg-navy);
+    border-top: 4px solid var(--gotg-orange);
 }
 
+    .gotg-footer small {
+        color: rgba(255, 255, 255, 0.65);
+    }
+
+/* Stat badges - soft pill, warm gold
+  */
 .stat-badge {
     background-color: var(--gotg-gold);
     color: var(--gotg-navy);
     font-weight: 700;
-    border-radius: 8px;
-    padding: 4px 10px;
+    border-radius: 999px;
+    padding: 6px 16px;
+    display: inline-block;
+    box-shadow: var(--gotg-shadow-sm);
+}
+
+/* Forms - soft, rounded, warm focus ring
+   */
+.form-control,
+.form-select {
+    border-radius: var(--gotg-radius-sm);
+    border: 1px solid var(--gotg-border);
+    padding: 0.6rem 0.9rem;
+    background-color: var(--gotg-surface);
+    transition: border-color var(--gotg-transition), box-shadow var(--gotg-transition);
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--gotg-orange);
+        box-shadow: 0 0 0 3px rgba(230, 126, 77, 0.18);
+    }
+
+.form-label {
+    font-weight: 600;
+    color: var(--gotg-navy);
+    margin-bottom: 0.35rem;
+}
+
+/* Alerts - soft, rounded, warm
+   */
+.alert {
+    border: none;
+    border-radius: var(--gotg-radius-sm);
+    box-shadow: var(--gotg-shadow-sm);
+}
+
+.alert-success {
+    background-color: #E6EFE3;
+    color: #3D5A3F;
+}
+
+.alert-danger {
+    background-color: #F7E3D9;
+    color: #8A4227;
+}
+
+/* Utility: gentle entrance animation
+   */
+@keyframes gotg-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gotg-animate {
+    animation: gotg-fade-up 500ms ease both;
 }

@@ -3,57 +3,48 @@
 @{
     ViewData["Title"] = "Volunteer Registration";
 }
-
 <h1 class="mb-4">Register as a Volunteer</h1>
 <hr />
-
 <div class="row">
     <div class="col-md-7">
-        <form method="post">
+        <form method="post" class="card card-gotg p-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
             <div class="form-group mb-3">
                 <label asp-for="Volunteer.FullName" class="control-label fw-bold"></label>
                 <input asp-for="Volunteer.FullName" class="form-control" placeholder="e.g., John Doe" />
                 <span asp-validation-for="Volunteer.FullName" class="text-danger"></span>
             </div>
-
             <div class="form-group mb-3">
                 <label asp-for="Volunteer.Email" class="control-label fw-bold"></label>
                 <input asp-for="Volunteer.Email" type="email" class="form-control" placeholder="john@example.com" />
                 <span asp-validation-for="Volunteer.Email" class="text-danger"></span>
             </div>
-
             <div class="form-group mb-3">
                 <label asp-for="Volunteer.PhoneNumber" class="control-label fw-bold"></label>
                 <input asp-for="Volunteer.PhoneNumber" class="form-control" placeholder="+27 82 123 4567" />
                 <span asp-validation-for="Volunteer.PhoneNumber" class="text-danger"></span>
             </div>
-
             <div class="form-group mb-3">
                 <label asp-for="Volunteer.Skills" class="control-label fw-bold"></label>
                 <textarea asp-for="Volunteer.Skills" class="form-control" rows="3" placeholder="e.g., First Aid, Logistics, IT Support"></textarea>
                 <span asp-validation-for="Volunteer.Skills" class="text-danger"></span>
             </div>
-
             <div class="form-group mb-3">
                 <label asp-for="Volunteer.Availability" class="control-label fw-bold"></label>
                 <input asp-for="Volunteer.Availability" class="form-control" placeholder="e.g., Weekends, Evenings, Full-time" />
                 <span asp-validation-for="Volunteer.Availability" class="text-danger"></span>
             </div>
-
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-lg w-100">
+                <button type="submit" class="btn btn-gotg btn-lg w-100">
                     <i class="bi bi-person-plus"></i> Register Now
                 </button>
             </div>
         </form>
     </div>
-
     <!-- Sidebar -->
     <div class="col-md-5">
-        <div class="card shadow-sm">
-            <div class="card-header bg-success text-white">
+        <div class="card card-gotg">
+            <div class="card-header text-white" style="background-color: var(--gotg-green); border-radius: var(--gotg-radius-lg) var(--gotg-radius-lg) 0 0; border: none;">
                 <h5 class="mb-0">Why Volunteer?</h5>
             </div>
             <div class="card-body">
@@ -62,22 +53,19 @@
                     <li><strong>Gain Experience:</strong> Learn valuable disaster response skills.</li>
                     <li><strong>Join a Community:</strong> Work with passionate people.</li>
                 </ul>
-
                 <hr />
-
                 <h6 class="fw-bold">Current Volunteer Needs:</h6>
                 <div class="d-flex flex-wrap gap-2">
-                    <span class="badge bg-danger p-2">Medical Professionals</span>
-                    <span class="badge bg-warning text-dark p-2">Logistics Coordinators</span>
-                    <span class="badge bg-info p-2">IT Support</span>
-                    <span class="badge bg-secondary p-2">General Support</span>
-                    <span class="badge bg-primary p-2">Translators</span>
-                    <span class="badge bg-dark p-2">Drivers</span>
+                    <span class="badge p-2" style="background-color: var(--gotg-orange); color: white; border-radius: 999px;">Medical Professionals</span>
+                    <span class="badge p-2" style="background-color: var(--gotg-gold); color: var(--gotg-navy); border-radius: 999px;">Logistics Coordinators</span>
+                    <span class="badge p-2" style="background-color: var(--gotg-green); color: white; border-radius: 999px;">IT Support</span>
+                    <span class="badge p-2" style="background-color: var(--gotg-muted); color: white; border-radius: 999px;">General Support</span>
+                    <span class="badge p-2" style="background-color: var(--gotg-navy); color: white; border-radius: 999px;">Translators</span>
+                    <span class="badge p-2" style="background-color: var(--gotg-orange-dark); color: white; border-radius: 999px;">Drivers</span>
                 </div>
             </div>
         </div>
-
-        <div class="card shadow-sm mt-3">
+        <div class="card card-gotg mt-3">
             <div class="card-body">
                 <h6><i class="bi bi-clock-history"></i> Time Commitment</h6>
                 <p class="small text-muted">Volunteers can choose their availability - every hour counts!</p>

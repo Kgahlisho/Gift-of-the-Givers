@@ -24,6 +24,13 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
+//policy for employee role
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Employee", policy => policy.RequireRole("Employee"));
+});
+
 builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/Employee", "Employee");
