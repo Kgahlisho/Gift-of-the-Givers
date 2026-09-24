@@ -75,6 +75,7 @@ namespace GiftofGivers.Functions
 
 
             _logger.LogInformation("Generated {Ref} for {Donor}.", certificate.CertificateReference, certificate.DonorName);
+            _logger.LogInformation("Validation passed for donor {Donor}, proceeding to generate certificate.", donation.DonorName);
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             await response.WriteAsJsonAsync(certificate);
