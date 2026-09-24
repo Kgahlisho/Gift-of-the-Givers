@@ -51,7 +51,7 @@ namespace GiftofGivers.Pages.Employee
             _db.ProjectUpdates.Add(NewUpdate);
             await _db.SaveChangesAsync();
 
-            TempData["Success"] = "Update posted successfully.";
+            TempData["Success"] = "Update was posted successfully, you can proceed.";
             return RedirectToPage();
         }
 
