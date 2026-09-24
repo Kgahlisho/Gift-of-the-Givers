@@ -40,7 +40,7 @@ namespace GiftofGivers.Pages.Employee
 
             if (string.IsNullOrWhiteSpace(NewUpdate.Title) || string.IsNullOrWhiteSpace(NewUpdate.Description))
             {
-                TempData["Error"] = "Title and description are required.";
+                TempData["Error"] = "Please make sure that you add a title and an appropriate description are required.";
                 return RedirectToPage();
             }
 
