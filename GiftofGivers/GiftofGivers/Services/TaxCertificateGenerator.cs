@@ -34,8 +34,7 @@ namespace GiftofGivers.Services
                         col.Item().Text($"Amount: {donation.Currency} {donation.Amount:N2}");
                         col.Item().Text($"Frequency: {(donation.Frequency == DonationFrequency.OneTime ? "One-Time Donation" : "Recurring Donation")}");
                         col.Item().PaddingTop(15).Text(
-                            "This certificate confirms a donation made to the Gift of the Givers Foundation. " +
-                            "This is a prototype placeholder document and does not constitute a valid tax deduction receipt.")
+                            "This certificate confirms that a donation was indeed made to the Gift of the Givers Foundation Establishment .")
                             .FontSize(10).FontColor(Colors.Grey.Darken1);
                     });
 
