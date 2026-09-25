@@ -25,6 +25,8 @@ steps:
   displayName: 'Restore NuGet packages'
   inputs:
     restoreSolution: '$(solution)'
+    feedsToUse: 'config'
+    nugetConfigPath: 'GiftofGivers/nuget.config'
 
 - task: VSBuild@1
   displayName: 'Build solution'
