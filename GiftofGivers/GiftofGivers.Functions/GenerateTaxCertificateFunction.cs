@@ -3,6 +3,7 @@ using System.Text.Json;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using GiftofGivers.Helpers;
 
 
 namespace GiftofGivers.Functions
@@ -64,7 +65,7 @@ namespace GiftofGivers.Functions
 
             var certificate = new
             {
-                CertificateReference = $"GOTG-{DateTime.UtcNow:yyyy}-{Random.Shared.Next(100000, 999999)}",
+                CertificateReference = DonationHelper.GenerateCertificateNumber(),
                 DonorName = donation.IsAnonymous ? "Anonymous Donor" : donation.DonorName,
                 donation.Amount,
                 Currency = string.IsNullOrWhiteSpace(donation.Currency) ? "ZAR" : donation.Currency,

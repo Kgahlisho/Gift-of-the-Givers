@@ -2,6 +2,7 @@ using GiftofGivers.Data;
 using GiftofGivers.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using GiftofGivers.Helpers;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GiftofGivers.Pages.Donation
@@ -19,6 +20,7 @@ namespace GiftofGivers.Pages.Donation
 
         [BindProperty]
         public GiftofGivers.Models.Donation Donation { get; set; } = new();
+
 
         [BindProperty]
         public bool DonateAsGuest { get; set; }
@@ -52,8 +54,7 @@ namespace GiftofGivers.Pages.Donation
             }
 
             Donation.DonationDate = DateTime.UtcNow;
-            Donation.CertificateReference = $"GOTG-{DateTime.UtcNow:yyyy}-{Random.Shared.Next(100000, 999999)}";
-
+            Donation.CertificateReference = DonationHelper.GenerateCertificateNumber();
             _db.Donations.Add(Donation);
             await _db.SaveChangesAsync();
 
