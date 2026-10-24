@@ -20,7 +20,7 @@ namespace GiftofGivers.Models
         // Only set when a logged-in Donor makes the donation
         public string? UserId { get; set; }
 
-        [Range(10, 1000000, ErrorMessage = "Please enter a donation amount of at least 10.")]
+        [Range(typeof(decimal),"10","1000000", ErrorMessage = "Please enter a donation amount of at least 10.")]
         public decimal Amount { get; set; }
 
         public Currency Currency { get; set; } = Currency.ZAR;

@@ -1,0 +1,25 @@
+[33m6c7124e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31mazure/master[m[33m)[m Minor UI tweak to trigger CI pipeline
+[33m4066370[m Update azure-pipelines.yml for Azure Pipelines
+[33m2366fd3[m Merge branch 'master' of https://dev.azure.com/GOTG22/Gift%20of%20the%20givers/_git/Gift%20of%20the%20givers
+[33maf88250[m Add nuget.config for Azure Artifacts feed restore in pipeline
+[33m9782b68[m Update azure-pipelines.yml for Azure Pipelines
+[33m839e190[m Use shared GiftofGivers.Helpers package in Azure Function in order forthe  certificate to be referenced in the generation of certificates across both the web app and functions
+[33mb8aaa1b[m[33m ([m[1;31mGiftoftheGivers/master[m[33m, [m[1;31mGiftoftheGivers/HEAD[m[33m)[m Add additional logging step in certificate generation function
+[33m25bb95d[m Make footer copyright year dynamic
+[33mf7b29b3[m Add DevOps note to About page
+[33m0433f33[m Making sure that the output command is appropriate for the user to understand the prompt clearly
+[33mbf283e6[m Merge branch 'master' of https://dev.azure.com/GOTG22/Gift%20of%20the%20givers/_git/Gift%20of%20the%20givers commit done
+[33m253a49c[m Minor UI tweak to trigger CI pipeline
+[33maaf90d6[m Set up CI with Azure Pipelines
+[33mf8c65e7[m[33m ([m[1;31mazure/certificate-feature[m[33m, [m[1;31mGift/certificate-feature[m[33m, [m[1;32mcertificate-feature[m[33m)[m Making sure that that the certificates generates the approriates infromation , which is requested and the tests done , were successeful and retured expected values
+[33m0f714da[m[33m ([m[1;31mazure/employee-dashboard-feature[m[33m, [m[1;31mGift/employee-dashboard-feature[m[33m, [m[1;32memployee-dashboard-feature[m[33m)[m Making sure that the UI is much more inviting and keeps the emplyees engaged and keeps them interactibg with the dashboardt
+[33m6272fd3[m[33m ([m[1;31mGift/master[m[33m)[m Remove stray gitignore file missing leading dot
+[33m4648a7e[m Merged PR 2: Testing out new branch
+[33m0628fcd[m Merged PR 1: Add availability dropdown validation to volunteer registration form
+[33m608e11f[m[33m ([m[1;31mazure/volunteer-feature[m[33m, [m[1;31mGift/volunteer-feature[m[33m, [m[1;32mvolunteer-feature[m[33m)[m Add availability dropdown validation to volunteer registration form
+[33m7946887[m[33m ([m[1;31mazure/donations-feature[m[33m, [m[1;31mGiftoftheGivers/donations-feature[m[33m, [m[1;32mdonations-feature[m[33m)[m Testing out new branch
+[33m61794d9[m Add root gitignore for bin, obj, .vs and zip files
+[33ma5481ae[m Add Azure Functions project
+[33m5e5e092[m Azure functions
+[33mf6e4bc6[m Add project files.
+[33mc70e1b5[m Add .gitattributes and .gitignore.
