@@ -38,7 +38,7 @@ steps:
   displayName: 'Run unit and integration tests'
   inputs:
     command: 'test'
-    projects: 'GiftofGivers.Tests/GiftofGivers.Tests.csproj'
-    arguments: '--configuration $(buildConfiguration) --filter "FullyQualifiedName!~LoadTest" --collect:"XPlat Code Coverage"'
+    projects: 'GiftofGivers/GiftofGivers.Tests/GiftofGivers.Tests.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage"'
     publishTestResults: true
     testRunTitle: 'GiftofGivers unit and integration tests'
