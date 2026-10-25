@@ -1,7 +1,3 @@
-
-
-# ASP.NET Core (.NET 8) - Build and test Gift of the Givers
-
 trigger:
   - master
 
@@ -12,33 +8,77 @@ variables:
   solution: '**/GiftofGivers.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  azureSubscription: 'GiftofGivers-Azure'
+  webAppName: 'GiftofGivers'
 
-steps:
-- task: NuGetToolInstaller@1
-  displayName: 'Install NuGet'
+stages:
+- stage: Build_Test
+  displayName: 'Build and Test'
+  jobs:
+  - job: Build_Test_Job
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Install .NET 8 SDK'
+      inputs:
+        packageType: 'sdk'
+        version: '8.x'
 
-- task: NuGetAuthenticate@1
-  displayName: 'Authenticate with Azure Artifacts'
+    - task: NuGetToolInstaller@1
+      displayName: 'Install NuGet'
 
-- task: NuGetCommand@2
-  displayName: 'Restore NuGet packages'
-  inputs:
-    restoreSolution: '$(solution)'
-    feedsToUse: 'config'
-    nugetConfigPath: 'GiftofGivers/nuget.config'
+    - task: NuGetCommand@2
+      displayName: 'Restore NuGet packages'
+      inputs:
+        restoreSolution: '$(solution)'
+        feedsToUse: 'config'
+        nugetConfigPath: 'GiftofGivers/nuget.config'
 
-- task: VSBuild@1
-  displayName: 'Build solution'
-  inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    - task: VSBuild@1
+      displayName: 'Build solution'
+      inputs:
+        solution: '$(solution)'
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run unit and integration tests'
-  inputs:
-    command: 'test'
-    projects: 'GiftofGivers/GiftofGivers.Tests/GiftofGivers.Tests.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage"'
-    publishTestResults: true
-    testRunTitle: 'GiftofGivers unit and integration tests'
+    - task: DotNetCoreCLI@2
+      displayName: 'Run unit and integration tests'
+      inputs:
+        command: 'test'
+        projects: '**/GiftofGivers.Tests.csproj'
+        arguments: '--configuration $(buildConfiguration) --no-build --filter "FullyQualifiedName!~LoadTest"'
+        publishTestResults: true
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Publish web app'
+      inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: '**/GiftofGivers.csproj'
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/web'
+        zipAfterPublish: true
+        modifyOutputPath: false
+
+    - publish: $(Build.ArtifactStagingDirectory)/web
+      artifact: web
+      displayName: 'Upload web artifact'
+
+- stage: Deploy_Web
+  displayName: 'Deploy Web App'
+  dependsOn: Build_Test
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: web
+    environment: 'production'
+    pool:
+      vmImage: 'windows-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureWebApp@1
+            displayName: 'Deploy to App Service'
+            inputs:
+              azureSubscription: '$(azureSubscription)'
+              appType: 'webApp'
+              appName: '$(webAppName)'
+              package: '$(Pipeline.Workspace)/web/*.zip'
