@@ -3,6 +3,9 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
+
+# ASP.NET Core (.NET 8) - Build and test Gift of the Givers
+
 trigger:
   - master
 
@@ -35,10 +38,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
-  displayName: 'Run tests'
-  condition: succeededOrFailed()
-  continueOnError: true
+- task: DotNetCoreCLI@2
+  displayName: 'Run unit and integration tests'
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'test'
+    projects: 'GiftofGivers.Tests/GiftofGivers.Tests.csproj'
+    arguments: '--configuration $(buildConfiguration) --filter "FullyQualifiedName!~LoadTest" --collect:"XPlat Code Coverage"'
+    publishTestResults: true
+    testRunTitle: 'GiftofGivers unit and integration tests'
