@@ -9,6 +9,10 @@ variables:
   azureSubscription: 'GiftofGivers-Azure'
   webAppName: 'GiftofGivers'
   functionAppName: 'GiftofGivers1'
+  sqlServerName: 'semiserver.database.windows.net'
+  sqlDatabaseName: 'GIFTDB'
+  sqlAdminUser: 'admin1'
+  # sqlAdminPassword -> SECRET variable: Pipelines > Edit > Variables > New variable > tick "Keep this value secret"
 
 stages:
 - stage: Build_Test
@@ -79,9 +83,51 @@ stages:
       artifact: functions
       displayName: 'Upload functions artifact'
 
+    # ---- C.3: generate an idempotent SQL script from the EF Core migrations
+    - script: dotnet tool install --global dotnet-ef --version 8.0.10
+      displayName: 'Install dotnet-ef'
+
+    - script: echo ##vso[task.prependpath]%USERPROFILE%\.dotnet\tools
+      displayName: 'Add dotnet tools to PATH'
+
+    - script: dotnet ef migrations script --idempotent --project GiftofGivers/GiftofGivers/GiftofGivers.csproj --configuration $(buildConfiguration) --no-build --output $(Build.ArtifactStagingDirectory)/sql/migrate.sql
+      displayName: 'Generate SQL migration script'
+      env:
+        ConnectionStrings__DefaultConnection: 'Server=ci-placeholder;Database=ci;'   # only selects the SQL Server provider; nothing connects
+
+    - publish: $(Build.ArtifactStagingDirectory)/sql
+      artifact: sql
+      displayName: 'Upload SQL artifact'
+
+- stage: Deploy_SQL
+  displayName: 'Deploy SQL schema'
+  dependsOn: Build_Test
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: DeploySql
+    environment: 'production'
+    pool:
+      vmImage: 'windows-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: SqlAzureDacpacDeployment@1
+            displayName: 'Apply EF migration script to Azure SQL'
+            inputs:
+              azureSubscription: '$(azureSubscription)'
+              AuthenticationType: 'server'
+              ServerName: '$(sqlServerName)'
+              DatabaseName: '$(sqlDatabaseName)'
+              SqlUsername: '$(sqlAdminUser)'
+              SqlPassword: '$(sqlAdminPassword)'
+              deployType: 'SqlTask'
+              SqlFile: '$(Pipeline.Workspace)/sql/migrate.sql'
+              IpDetectionMethod: 'AutoDetect'
+
 - stage: Deploy_Web
   displayName: 'Deploy Web App'
-  dependsOn: Build_Test
+  dependsOn: Deploy_SQL
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   jobs:
   - deployment: DeployWebApp

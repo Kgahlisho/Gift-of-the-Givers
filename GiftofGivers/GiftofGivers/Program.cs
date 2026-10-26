@@ -10,9 +10,20 @@ QuestPDF.Settings.License = LicenseType.Community;
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+// Azure SQL when a SQL Server connection string is configured (App Service connection string
+// "DefaultConnection"); otherwise SQLite for local development and the automated tests.
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var useSqlServer = !string.IsNullOrWhiteSpace(connectionString) &&
+    (connectionString.Contains("Server=", StringComparison.OrdinalIgnoreCase) ||
+     connectionString.Contains("Data Source=tcp:", StringComparison.OrdinalIgnoreCase));
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")
-        ?? "Data Source=gotg.db"));
+{
+    if (useSqlServer)
+        options.UseSqlServer(connectionString!);
+    else
+        options.UseSqlite(connectionString ?? "Data Source=gotg.db");
+});
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
@@ -43,7 +54,10 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var db = services.GetRequiredService<ApplicationDbContext>();
-    db.Database.EnsureCreated();
+    // SQLite (local/tests): create schema directly. Azure SQL: schema is applied by the pipeline's
+    // EF Core migration script, so we must NOT call EnsureCreated there.
+    if (db.Database.IsSqlite())
+        db.Database.EnsureCreated();
     await SeedData.InitializeAsync(services);
 }
 

@@ -1,0 +1,28 @@
+﻿
+=== SQL SERVERS ===
+
+=== WEB APP: connection string NAMES/TYPES (values hidden) ===
+
+=== WEB APP: app setting NAMES (values hidden) ===
+
+=== ALL RESOURCES IN GiftofGiversResource ===
+
+=== PROJECT: SQL Server EF package / Migrations folder? ===
+<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
+Migrations folder exists: False
+Package Id      Version      Commands
+-------------------------------------
+
+=== SQL SERVERS ===
+
+=== WEB APP: connection string NAMES/TYPES (values hidden) ===
+
+=== WEB APP: app setting NAMES (values hidden) ===
+
+=== ALL RESOURCES IN GiftofGiversResource ===
+
+=== PROJECT: SQL Server EF package / Migrations folder? ===
+<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
+Migrations folder exists: False
+Package Id      Version      Commands
+-------------------------------------
