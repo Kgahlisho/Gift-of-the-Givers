@@ -5,3 +5,10 @@ obj/
 *.user
 *.suo
 *.db
+
+bin/
+obj/
+.vs/
+*.db
+*.nupkg
+project-info.txt

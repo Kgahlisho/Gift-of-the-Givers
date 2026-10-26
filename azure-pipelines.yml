@@ -5,11 +5,10 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/GiftofGivers.sln'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   azureSubscription: 'GiftofGivers-Azure'
   webAppName: 'GiftofGivers'
+  functionAppName: 'GiftofGivers1'
 
 stages:
 - stage: Build_Test
@@ -23,30 +22,34 @@ stages:
         packageType: 'sdk'
         version: '8.x'
 
-    - task: NuGetToolInstaller@1
-      displayName: 'Install NuGet'
-
-    - task: NuGetCommand@2
-      displayName: 'Restore NuGet packages'
+    # No private feed any more: GiftofGivers.Helpers is a ProjectReference, so only nuget.org is used.
+    - task: DotNetCoreCLI@2
+      displayName: 'Restore'
       inputs:
-        restoreSolution: '$(solution)'
-        feedsToUse: 'config'
-        nugetConfigPath: 'GiftofGivers/nuget.config'
+        command: 'restore'
+        projects: |
+          **/GiftofGivers.csproj
+          **/GiftofGivers.Functions.csproj
+          **/GiftofGivers.Tests.csproj
 
-    - task: VSBuild@1
-      displayName: 'Build solution'
+    - task: DotNetCoreCLI@2
+      displayName: 'Build Web and Test projects'
       inputs:
-        solution: '$(solution)'
-        platform: '$(buildPlatform)'
-        configuration: '$(buildConfiguration)'
+        command: 'build'
+        projects: |
+          **/GiftofGivers.csproj
+          **/GiftofGivers.Tests.csproj
+        arguments: '--configuration $(buildConfiguration) --no-restore'
 
+    # Selenium project is not run in CI (needs a live site + browser); load test excluded.
     - task: DotNetCoreCLI@2
       displayName: 'Run unit and integration tests'
       inputs:
         command: 'test'
         projects: '**/GiftofGivers.Tests.csproj'
-        arguments: '--configuration $(buildConfiguration) --no-build --filter "FullyQualifiedName!~LoadTest"'
+        arguments: '--configuration $(buildConfiguration) --no-build --filter "FullyQualifiedName!~LoadTest" --collect:"XPlat Code Coverage"'
         publishTestResults: true
+        testRunTitle: 'GiftofGivers unit and integration tests'
 
     - task: DotNetCoreCLI@2
       displayName: 'Publish web app'
@@ -54,13 +57,27 @@ stages:
         command: 'publish'
         publishWebProjects: false
         projects: '**/GiftofGivers.csproj'
-        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/web'
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/web --no-build'
         zipAfterPublish: true
         modifyOutputPath: false
 
     - publish: $(Build.ArtifactStagingDirectory)/web
       artifact: web
       displayName: 'Upload web artifact'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Publish Azure Functions'
+      inputs:
+        command: 'publish'
+        publishWebProjects: false
+        projects: '**/GiftofGivers.Functions.csproj'
+        arguments: '--configuration $(buildConfiguration) --no-restore --output $(Build.ArtifactStagingDirectory)/functions'
+        zipAfterPublish: true
+        modifyOutputPath: false
+
+    - publish: $(Build.ArtifactStagingDirectory)/functions
+      artifact: functions
+      displayName: 'Upload functions artifact'
 
 - stage: Deploy_Web
   displayName: 'Deploy Web App'
@@ -82,3 +99,27 @@ stages:
               appType: 'webApp'
               appName: '$(webAppName)'
               package: '$(Pipeline.Workspace)/web/*.zip'
+
+- stage: Deploy_Functions
+  displayName: 'Deploy Azure Functions'
+  dependsOn: Build_Test
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  jobs:
+  - deployment: functions
+    environment: 'production'
+    pool:
+      vmImage: 'windows-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureFunctionApp@2
+            displayName: 'Deploy Function App'
+            inputs:
+              azureSubscription: '$(azureSubscription)'
+              appType: 'functionAppLinux'        # your publish profile says IsLinux=true
+              appName: '$(functionAppName)'
+              package: '$(Pipeline.Workspace)/functions/*.zip'
+              runtimeStack: 'DOTNET-ISOLATED|8.0'
+              # If the Function App is on the FLEX CONSUMPTION plan, remove runtimeStack and add:
+              # isFlexConsumption: true
