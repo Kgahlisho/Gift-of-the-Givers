@@ -7,9 +7,12 @@ namespace GiftofGivers.Models
 
     public class Donation
     {
+        [StringLength(250)]
+        public string? Notes { get; set; }
+
         public int Id { get; set; }
 
-        [Required, StringLength(100)]
+        [Required, StringLength(250)]
         public string DonorName { get; set; } = "Anonymous Donor";
 
         [EmailAddress]
