@@ -84,7 +84,7 @@ stages:
   dependsOn: Build_Test
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   jobs:
-  - deployment: web
+  - deployment: DeployWebApp
     environment: 'production'
     pool:
       vmImage: 'windows-latest'
